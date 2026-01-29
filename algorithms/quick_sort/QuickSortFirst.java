@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class QuickSortFirst implements MyAlgorithms {
     // Fields: to determine which implementation to use (recursive or iterative):
-    private boolean useRecursive;
+    private final boolean useRecursive;
     // Constructor
     public QuickSortFirst(boolean useRecursive){
         this.useRecursive = useRecursive;
