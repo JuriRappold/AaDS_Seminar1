@@ -14,7 +14,7 @@ public class Temp {
         InsertionRecursive algo2 = new InsertionRecursive(); // works as intended
 
 //        QuickSortFirst recursiveFirst = new QuickSortFirst(true);
-        QuickSortMo3 recursiveMo3 = new QuickSortMo3(true);
+        QuickSortMo3 recursiveMo3 = new QuickSortMo3(false);
         Integer[] array = new Integer[5];
         array[0] = 12;
         array[1] = 11;
@@ -22,6 +22,7 @@ public class Temp {
         array[3] = 5;
         array[4] = 6;
         int lastElIndex = array.length-1;
+        recursiveMo3.sort(array);
         System.out.println("Pre-sorted Array: " + Arrays.toString(array));
         System.out.println("After-sorted Array: "+ Arrays.toString(array));
 

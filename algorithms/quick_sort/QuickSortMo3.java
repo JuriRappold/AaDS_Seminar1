@@ -12,8 +12,17 @@ public class QuickSortMo3 implements MyAlgorithms {
         this.useRecursive = useRecursive;
     }
 
+    public <AnyType extends Comparable<? super AnyType>> void sort(AnyType[] a){
+        int left = 0;
+        int right = a.length -1;
+        if(useRecursive)
+            sortRecursive(a, left, right);
+        else
+            sortIterative(a, left, right);
+    }
+
     // recursive version
-    public static <AnyType extends Comparable<? super AnyType>> void
+    private <AnyType extends Comparable<? super AnyType>> void
     sortRecursive(AnyType[] a, int left, int right){ // throws error after being done... i think thats why the cutoff exits
         if( left + CUTOFF <= right ) {
 //            System.out.println(Arrays.toString(a));
@@ -44,7 +53,7 @@ public class QuickSortMo3 implements MyAlgorithms {
     }
 
     // iterative version
-    public static <AnyType extends Comparable<? super AnyType>> void
+    private <AnyType extends Comparable<? super AnyType>> void
     sortIterative(AnyType[] a, int left, int right){
         // O(N^2) rn, thats the worst outcome for QuickSort
 //        if( left + CUTOFF <= right){
@@ -112,20 +121,20 @@ public class QuickSortMo3 implements MyAlgorithms {
 //    }
 
 
-    private static <AnyType extends Comparable<? super AnyType>> void
-    swapReferences(AnyType[] a, int first, int second){
-        AnyType firstElement = a[first];
-        AnyType secondElement = a[second];
+    private <AnyType extends Comparable<? super AnyType>> void
+    swapReferences(AnyType[] a, int firstEl, int secondEl){
+        AnyType firstElement = a[firstEl];
+        AnyType secondElement = a[secondEl];
 
-        a[second] = firstElement;
-        a[first] = secondElement;
+        a[secondEl] = firstElement;
+        a[firstEl] = secondElement;
     }
 
     /**
      * Return median of firstEl, center, and lastEl.
      * Order these and hide the pivot.
      */
-    private static <AnyType extends Comparable<? super AnyType>>
+    private <AnyType extends Comparable<? super AnyType>>
     AnyType median3( AnyType [ ] a, int firsEl, int lastEl )
     {
         int center = ( firsEl + lastEl ) / 2;
@@ -146,7 +155,7 @@ public class QuickSortMo3 implements MyAlgorithms {
      * Simple insertion sort.
      * @param a an array of Comparable items.
      */
-    public static <AnyType extends Comparable<? super AnyType>>
+    private <AnyType extends Comparable<? super AnyType>>
     void insertionSort( AnyType [ ] a, int start, int end)
     {
         System.out.println("Doing Insertion Sort");
@@ -161,7 +170,7 @@ public class QuickSortMo3 implements MyAlgorithms {
         }
     }
 
-    public static <AnyType extends Comparable<? super AnyType>>
+    private <AnyType extends Comparable<? super AnyType>>
     int partioning(AnyType[] a, int left, int right){
 //        int pivotIndex = right -1;
 //        int i = left;

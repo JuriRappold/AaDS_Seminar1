@@ -68,12 +68,13 @@ public class QuickSortFirst implements MyAlgorithms {
             sortIterative(a, left, right);
     }
 
-    private <AnyType extends Comparable<? super AnyType>> void swapReferences(AnyType[] a, int left, int right){
-        AnyType leftElement = a[left];
-        AnyType rightElement = a[right];
+    private static <AnyType extends Comparable<? super AnyType>> void
+    swapReferences(AnyType[] a, int first, int second){
+        AnyType firstElement = a[first];
+        AnyType secondElement = a[second];
 
-        a[right] = leftElement;
-        a[left] = rightElement;
+        a[second] = firstElement;
+        a[first] = secondElement;
     }
 
 
