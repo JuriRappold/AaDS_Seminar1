@@ -21,11 +21,8 @@ public class Temp {
         array[2] = 13;
         array[3] = 5;
         array[4] = 6;
+        int lastElIndex = array.length-1;
         System.out.println("Pre-sorted Array: " + Arrays.toString(array));
-        //algo1.sort(array);
-        //algo2.sort(array);
-//        recursiveFirst.sort(array, 0, array.length);
-        recursiveMo3.sort(array, 0, array.length);
         System.out.println("After-sorted Array: "+ Arrays.toString(array));
 
 
