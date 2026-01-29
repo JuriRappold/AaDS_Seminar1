@@ -1,32 +1,53 @@
-package algorithms.quick_sort;
+# QuickSortFirst.java
+*first recursive implementation attempt*
+```Java
+// Base Case
+        if(a.length<=1)
+            return;
 
-import algorithms.MyAlgorithms;
+        AnyType pivot = a[left];
+        System.out.println(pivot);
+        int pivotIndex = left;
+        int lesserIndex = left; // pivot-index -1
+        int greaterIndex = right-1; // pivot-index +1
+//        System.out.println(lesserIndex);
+//        System.out.println(greaterIndex);
 
-import java.util.Arrays;
-
-public class QuickSortFirst {
-
-//    public QuickSortFirst(boolean useRecursive) {
-//        super(useRecursive);
-//        System.out.println("Constructor Done");
-//    }
+//        for(int i = lesserIndex; i < a.length; i++){
+//            if(pivot.compareTo(a[i]) < 0){ // if its bigger than the pivot:
+//                AnyType temp = a[lesserIndex];
+//                a[lesserIndex] = a[i];
 //
-//    @Override
-//    protected <AnyType extends Comparable<? super AnyType>> AnyType makePivot(AnyType[] a, int firstEl, int secondEl) {
-//        int secondToLast = a.length - 1;
-//        super.swapReferences(a, 0, secondToLast);
-//        return a[secondToLast];
-//    }
-//
-//    @Override
-//    public String getAlgoType() {
-//        if(super.useRecursive)
-//            return "QuickSortMo3 - Recursive";
-//        else
-//            return "QuickSortMo3 - Iterative";
-//    }
+//            }
+//        }
+        for( ; ; )
+        {
+            while( a[ ++lesserIndex ].compareTo( pivot ) > 0) {//run through list until a bigger element than the pivot is met
+//                System.out.println("LesserIndex: " + lesserIndex);
+            }
+            while( a[ --greaterIndex ].compareTo( pivot ) < 0) { //run through list until a smaller element than the pivot is met
+//                System.out.println("GreaterIndex: " + greaterIndex);
+            }
+            if( lesserIndex < greaterIndex )
+                swapReferences( a, lesserIndex, greaterIndex );
+            else
+                break;
+        }
+
+        swapReferences( a, lesserIndex, right-1 ); // Restore pivot
+
+        // Recursive calls
+        System.out.println("Recursion");
+        System.out.println(Arrays.toString(a));
+        sortRecursive(a, left, lesserIndex - 1); // sort sublist of lesser elements
+        sortRecursive(a, lesserIndex + 1, right); // sort sublist of greater elements
+
+```
+
+*entire class for a second*
+```Java
 // Fields: to determine which implementation to use (recursive or iterative):
-private final boolean useRecursive;
+    private final boolean useRecursive;
     private static final int CUTOFF = 1;
     // Constructor
     public QuickSortFirst(boolean useRecursive){
@@ -50,9 +71,7 @@ private final boolean useRecursive;
     private <AnyType extends Comparable<? super AnyType>> void sortIterative(AnyType[] a, int left, int right){}
 
     // wrapper for private sorting algo implementation
-    public <AnyType extends Comparable<? super AnyType>> void sort(AnyType[] a){
-        int left = 0;
-        int right = a.length-1;
+    public <AnyType extends Comparable<? super AnyType>> void sort(AnyType[] a, int left, int right){
         if(useRecursive)
             sortRecursive(a, left, right);
         else
@@ -121,12 +140,11 @@ private final boolean useRecursive;
         }
     }
 
-//    @Override
+    @Override
     public String getAlgoType() {
         if(useRecursive)
             return "QuickSortFirst - Recursive";
         else
             return "QuickSortFirst - Iterative";
     }
-
-}
+```

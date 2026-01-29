@@ -1,16 +1,20 @@
 package algorithms.quick_sort;
 
-import algorithms.MyAlgorithms;
+public class QuickSortParent{
+    protected final boolean useRecursive;
+    private final static int CUTOFF = 1;
+    //public <AnyType extends Comparable<? super AnyType>> array;
 
-public class QuickSortMo3 implements MyAlgorithms {
-    private final boolean useRecursive;
-    private final static int CUTOFF = 1; // if 0 will throw error bc right = -1, but will have finished sorting
-
-    public QuickSortMo3(boolean useRecursive){
+    //<AnyType extends Comparable<? super AnyType>>
+    // AnyType[] a,
+    public  QuickSortParent( boolean useRecursive){
         this.useRecursive = useRecursive;
+        //this.array = a;
     }
 
+    // public wrapper-method for sorting implementation type
     public <AnyType extends Comparable<? super AnyType>> void sort(AnyType[] a){
+        System.out.println("Entered .sort() method");
         int left = 0;
         int right = a.length -1;
         if(useRecursive)
@@ -23,24 +27,6 @@ public class QuickSortMo3 implements MyAlgorithms {
     private <AnyType extends Comparable<? super AnyType>> void
     sortRecursive(AnyType[] a, int left, int right){ // throws error after being done... i think thats why the cutoff exits
         if( left + CUTOFF <= right ) {
-//            System.out.println(Arrays.toString(a));
-//            AnyType pivot = median3( a, left, right );
-//
-//            // Begin partitioning
-//            int i = left, j = right - 1;
-//            for( ; ; )
-//            {
-//                while( a[ ++i ].compareTo( pivot ) < 0 ) { }
-//                System.out.println("i: " + i);
-//                while( a[ --j ].compareTo( pivot ) > 0 ) { }
-//                System.out.println("j: " + j);
-//                if( i < j )
-//                    swapReferences( a, i, j );
-//                else
-//                    break;
-//            }
-//
-//            swapReferences( a, i, right - 1 ); // Restore pivot
             int pivotIndex = partioning(a, left, right); // returns pivot index
 
             sortRecursive( a, left, pivotIndex - 1 ); // Sort small elements
@@ -54,24 +40,6 @@ public class QuickSortMo3 implements MyAlgorithms {
     private <AnyType extends Comparable<? super AnyType>> void
     sortIterative(AnyType[] a, int left, int right){
         // O(N^2) rn, thats the worst outcome for QuickSort
-//        if( left + CUTOFF <= right){
-//            AnyType pivot = median3(a, left, right);
-//
-//            // Begin partitioning
-//            int i = left, j = right - 1;
-//            for( ; ; )
-//            {
-//                while( a[ ++i ].compareTo( pivot ) < 0 ) { }
-//                while( a[ --j ].compareTo( pivot ) > 0 ) { }
-//                if( i < j )
-//                    swapReferences( a, i, j );
-//                else// put iterative stuff; here change i & j?
-//                    break;
-//            }
-//
-//            swapReferences( a, i, right - 1 ); // Restore pivot
-//        } else
-//            insertionSort( a, left, right );
         // Create an auxiliary stack
         int[] stack = new int[right - left +1];
 
@@ -110,8 +78,7 @@ public class QuickSortMo3 implements MyAlgorithms {
 
     }
 
-
-    private <AnyType extends Comparable<? super AnyType>> void
+    protected  <AnyType extends Comparable<? super AnyType>> void
     swapReferences(AnyType[] a, int firstEl, int secondEl){
         AnyType firstElement = a[firstEl];
         AnyType secondElement = a[secondEl];
@@ -120,32 +87,6 @@ public class QuickSortMo3 implements MyAlgorithms {
         a[firstEl] = secondElement;
     }
 
-    /**
-     * Uses Median-of-Three partioning
-     * Return median of firstEl, center, and lastEl.
-     * Order these and hide the pivot.
-     */
-    private <AnyType extends Comparable<? super AnyType>>
-    AnyType makePivot(AnyType [ ] a, int firsEl, int lastEl )
-    {
-        int center = ( firsEl + lastEl ) / 2;
-        if( a[ center ].compareTo( a[ firsEl ] ) < 0 )
-            swapReferences( a, firsEl, center );
-        if( a[ lastEl ].compareTo( a[ firsEl ] ) < 0 )
-            swapReferences( a, firsEl, lastEl );
-        if( a[ lastEl ].compareTo( a[ center ] ) < 0 )
-            swapReferences( a, center, lastEl );
-
-        // Place pivot at position right - 1
-        swapReferences( a, center, lastEl - 1 );
-        return a[ lastEl - 1 ];
-    }
-
-
-    /**
-     * Simple insertion sort.
-     * @param a an array of Comparable items.
-     */
     private <AnyType extends Comparable<? super AnyType>>
     void insertionSort( AnyType [ ] a, int start, int end)
     {
@@ -163,24 +104,6 @@ public class QuickSortMo3 implements MyAlgorithms {
 
     private <AnyType extends Comparable<? super AnyType>>
     int partioning(AnyType[] a, int left, int right){
-//        int pivotIndex = right -1;
-//        int i = left;
-//        int j =  left+ 1;// left+1;
-//        AnyType pivotElement = median3(a, left, right); // median3() places the pivot element on second to last index
-//        System.out.println("Pivot: "+pivotElement);
-//
-//        while(j<pivotIndex){// O(N)
-//            if(pivotElement.compareTo( a[j] ) > 0){
-//                i++;
-//                swapReferences(a, i, j);
-//            }
-//            j++;
-//        }
-//        swapReferences(a, i+1, pivotIndex);
-//        System.out.println(Arrays.toString(a));
-//        pivotIndex = i+1;
-//        return pivotIndex;
-//        down below is the for-loop implementation of the above code
         int pivotIndex = right-1;
         int i = left-1;
         AnyType pivotEl = makePivot(a, left, right); // puts the pivot element as the second to last element
@@ -196,15 +119,14 @@ public class QuickSortMo3 implements MyAlgorithms {
 
     }
 
+    //@Override
+    protected <AnyType extends Comparable<? super AnyType>>
+    AnyType makePivot(AnyType[] a, int firstEl, int secondEl) {
+        return null;
+    }
 
-
-
-
-    @Override
+    //@Override
     public String getAlgoType() {
-        if(useRecursive)
-            return "QuickSortMo3 - Recursive";
-        else
-            return "QuickSortMo3 - Iterative";
+        return "QuickSort Parent Class";
     }
 }
